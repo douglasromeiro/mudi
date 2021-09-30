@@ -16,7 +16,7 @@
 						<div class=row>
 							<div class="col-md-5">
 								Valor:
-								<span th:if="${pedido.valorProduto} != null" th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorProduto,3,'POINT',2,'COMMA')}">299,99</span>
+								<span th:if="${pedido.valorNegociado} != null" th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorNegociado,3,'POINT',2,'COMMA')}">299,99</span>
 							</div>
 							<div class="col-md-7">
 								Data de entrega:

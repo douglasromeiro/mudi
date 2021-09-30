@@ -2,7 +2,9 @@ package br.com.mvc.mudi.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,8 +23,9 @@ public class Pedido {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+
 	private String nomeProduto;
-	private BigDecimal valorProduto;
+	private BigDecimal valorNegociado;
 	private LocalDate dataDaEntrega;
 	private String urlProduto;
 	private String urlImagem;
@@ -33,7 +37,19 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	private User user;
+	
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido" ,fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Oferta> oferta;
+
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public User getUser() {
 		return user;
@@ -59,12 +75,12 @@ public class Pedido {
 		this.nomeProduto = nomeProduto;
 	}
 
-	public BigDecimal getValorProduto() {
-		return valorProduto;
+	public BigDecimal getValorNegociado() {
+		return valorNegociado;
 	}
 
-	public void setValorProduto(BigDecimal valorProduto) {
-		this.valorProduto = valorProduto;
+	public void setValorNegociado(BigDecimal valorNegociado) {
+		this.valorNegociado = valorNegociado;
 	}
 
 	public LocalDate getDataDaEntrega() {
@@ -99,4 +115,11 @@ public class Pedido {
 		this.descricao = descricao;
 	}
 
+	public List<Oferta> getOferta() {
+		return oferta;
+	}
+	
+	public void setOferta(List<Oferta> oferta) {
+		this.oferta = oferta;
+	}
 }
